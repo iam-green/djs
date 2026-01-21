@@ -6,12 +6,10 @@
       "decorators": true
     },
     "target": "es2022",
-    "keepClassNames": true,
-    "loose": false,
-    "externalHelpers": true
+    "keepClassNames": true
   },
   "module": {
-    "type": "es6",
+    "type": "commonjs",
     "noInterop": false
   },
   "minify": false
