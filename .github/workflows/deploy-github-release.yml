@@ -1,0 +1,83 @@
+name: Deploy GitHub Release Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: >
+      contains(github.event.head_commit.message, 'release:') ||
+      contains(github.event.head_commit.message, 'hotfix:')
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Extract Version from Commit Message
+        id: get_version
+        env:
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
+        run: |
+          VERSION=$(echo "$COMMIT_MSG" | grep -oP '`\K[0-9]+\.[0-9]+\.[0-9]+(?=`)' | head -1)
+          
+          if [ -z "$VERSION" ]; then
+            echo "Error: Version not found in backticks (e.g. \`0.0.1\`) in commit message."
+            exit 1
+          fi
+          
+          echo "VERSION=v$VERSION" >> $GITHUB_OUTPUT
+          echo "Extracted Version: v$VERSION"
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Type Check
+        run: npm run type-check
+
+      - name: Run Tests
+        run: npm run test
+
+      - name: Build and Prepare Release Folder
+        run: |
+          npm run build
+          npm run deploy:gha
+
+      - name: Deploy to Release Branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: release
+          folder: out
+          clean: true
+          single-commit: false
+          commit-message: ${{ github.event.head_commit.message }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Zip Release Artifacts
+        run: |
+          cd out
+          zip release-${{ steps.get_version.outputs.VERSION }}.zip *
+          cd ..
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.get_version.outputs.VERSION }}
+          name: release ${{ steps.get_version.outputs.VERSION }}
+          body: |
+            ## 📖 Release Notes
+            ${{ github.event.head_commit.message }}
+          files: |
+            out/release-${{ steps.get_version.outputs.VERSION }}.zip
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

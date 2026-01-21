@@ -1,0 +1,22 @@
+name: "📜 Docs"
+description: "Documentation-related tasks"
+labels: ["docs"]
+body:
+  - type: textarea
+    attributes:
+      label: 📄 Description
+      description: Please describe the task or change.
+      placeholder: The more details, the better!
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 💻 Work to be done
+      description: Please list the tasks as checkbox items.
+      placeholder: Please break tasks down into detailed steps!
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 🔍 References
+      description: Please provide any reference materials, if available.

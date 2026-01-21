@@ -1,0 +1,30 @@
+name: "🐞 Bug"
+description: "Bug report"
+labels: ["bug"]
+body:
+  - type: textarea
+    attributes:
+      label: 🐞 Description
+      description: Please describe the bug.
+      placeholder: The more details, the better!
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 📄 Bug logs
+      description: If there are logs, please paste them here.
+      render: shell
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: 🙋🏻 Steps to reproduce
+      description: Please describe how to reproduce the bug in Given-When-Then format.
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: 🔍 References
+      description: Please provide any reference materials if available.
+    validations:
+      required: false

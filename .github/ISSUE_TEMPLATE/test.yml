@@ -1,0 +1,22 @@
+name: "👀 Test"
+description: "Test-related tasks"
+labels: ["test"]
+body:
+  - type: textarea
+    attributes:
+      label: 📄 Description
+      description: Please describe what the task is.
+      placeholder: The more details, the better!
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 💻 Tasks to be done
+      description: Please write the tasks in a checkbox format.
+      placeholder: Please break them down as much as possible!
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 🔍 References
+      description: Please provide any reference materials, if available.

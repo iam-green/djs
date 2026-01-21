@@ -1,0 +1,22 @@
+name: "🛠️ Refactor"
+description: "Refactoring"
+labels: ["refactor"]
+body:
+  - type: textarea
+    attributes:
+      label: "📄 Description"
+      description: "Please describe the parts that need refactoring."
+      placeholder: "The more detail you provide, the better!"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: "💻 Tasks"
+      description: "Please write tasks in a checklist format."
+      placeholder: "Please break tasks down as much as possible!"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: "🔍 References"
+      description: "Please include any references if available."

@@ -1,0 +1,22 @@
+name: "✨ Feature"
+description: "Add a new feature"
+labels: ["feature"]
+body:
+  - type: textarea
+    attributes:
+      label: 📄 Description
+      description: Please provide a description of the new feature.
+      placeholder: The more detailed, the better!
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 💻 Tasks to be done
+      description: Please list tasks as checkboxes.
+      placeholder: Please break tasks down as much as possible!
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 🔍 References
+      description: Please provide any reference materials if available.
