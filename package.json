@@ -16,8 +16,10 @@
     "dist"
   ],
   "scripts": {
-    "dev": "tsup src/index.ts --format cjs,esm --watch --dts",
-    "build": "tsup src/index.ts --format cjs,esm --minify --clean --dts",
+    "dev:babel": "babel src --extensions .ts --out-dir .babel --watch",
+    "dev": "concurrently \"npm run dev:babel\" \"tsup .babel/index.ts --format cjs,esm --watch --dts\"",
+    "build:babel": "babel src --extensions .ts --out-dir .babel",
+    "build": "npm run build:babel && tsup .babel/index.ts --format cjs,esm --minify --clean --dts",
     "deploy:gha": "shx mkdir out && shx cp -r package.json LICENSE dist out/",
     "type-check": "tsc --noEmit",
     "test": "jest --passWithNoTests",
@@ -34,7 +36,7 @@
   "author": "iam-green",
   "license": "MIT",
   "devDependencies": {
-"@babel/cli": "^7.28.6",
+    "@babel/cli": "^7.28.6",
     "@babel/core": "^7.28.6",
     "@babel/plugin-proposal-decorators": "^7.28.6",
     "@babel/plugin-transform-class-properties": "^7.28.6",
@@ -43,6 +45,7 @@
     "@swc/jest": "^0.2.39",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.0.9",
+    "concurrently": "^9.2.1",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
