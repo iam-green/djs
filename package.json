@@ -16,10 +16,8 @@
     "dist"
   ],
   "scripts": {
-    "dev:babel": "babel src --extensions .ts --out-dir .babel --watch",
-    "dev": "concurrently \"npm run dev:babel\" \"tsup .babel/index.ts --format cjs,esm --watch --dts\"",
-    "build:babel": "babel src --extensions .ts --out-dir .babel",
-    "build": "npm run build:babel && tsup .babel/index.ts --format cjs,esm --minify --clean --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --watch --dts",
+    "build": "tsup src/index.ts --format cjs,esm --minify --clean --dts",
     "deploy:gha": "shx mkdir out && shx cp -r package.json LICENSE dist out/",
     "type-check": "tsc --noEmit",
     "test": "jest --passWithNoTests",
@@ -36,16 +34,10 @@
   "author": "iam-green",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.28.6",
-    "@babel/core": "^7.28.6",
-    "@babel/plugin-proposal-decorators": "^7.28.6",
-    "@babel/plugin-transform-class-properties": "^7.28.6",
-    "@babel/preset-env": "^7.28.6",
     "@swc/core": "^1.15.10",
     "@swc/jest": "^0.2.39",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.0.9",
-    "concurrently": "^9.2.1",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
@@ -55,7 +47,11 @@
     "shx": "^0.4.0",
     "tsc-alias": "^1.8.16",
     "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.53.1"
+  },
+  "peerDependencies": {
+    "discord.js": "^14.25.1"
   }
 }

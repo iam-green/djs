@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
     "target": "es2022",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "rootDir": "./src",
     "outDir": "./dist",
     "baseUrl": ".",
-    "paths": { "@/*": ["src/*", "dist/*"] },
+    "paths": { "@/*": ["src/*"] },
     "lib": ["ES2022", "ESNext.Decorators"],
     "strict": true,
     "declaration": true,
